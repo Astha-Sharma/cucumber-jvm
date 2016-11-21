@@ -20,6 +20,7 @@ public class ScenarioImpl implements Scenario {
     private final Set<Tag> tags;
     private final String scenarioName;
     private final String scenarioId;
+    private Runtime runtime;
 
     public ScenarioImpl(Reporter reporter, Set<Tag> tags, gherkin.formatter.model.Scenario gherkinScenario) {
         this.reporter = reporter;
@@ -27,9 +28,19 @@ public class ScenarioImpl implements Scenario {
         this.scenarioName = gherkinScenario.getName();
         this.scenarioId = gherkinScenario.getId();
     }
+    
+    public ScenarioImpl(Reporter reporter, Set<Tag> tags, gherkin.formatter.model.Scenario gherkinScenario, Runtime runtime) {
+        this(reporter, tags, gherkinScenario);
+        this.runtime = runtime;
+    }
 
     void add(Result result) {
         stepResults.add(result);
+    }
+    
+    @Override
+    public List<Object> getRunningTagNames() {
+        return (runtime.getRuntimeOptions().getFilters());
     }
 
     @Override

@@ -103,6 +103,10 @@ public class Runtime implements UnreportedStepExecutor {
         errors.add(error);
     }
 
+    public RuntimeOptions getRuntimeOptions() {
+        return runtimeOptions;
+    }
+    
     /**
      * This is the main entry point. Used from CLI, but not from JUnit.
      */
@@ -143,7 +147,7 @@ public class Runtime implements UnreportedStepExecutor {
         undefinedStepsTracker.reset();
         //TODO: this is the initial state of the state machine, it should not go here, but into something else
         skipNextStep = false;
-        scenarioResult = new ScenarioImpl(reporter, tags, gherkinScenario);
+        scenarioResult = new ScenarioImpl(reporter, tags, gherkinScenario, this);
     }
 
     public void disposeBackendWorlds(String scenarioDesignation) {

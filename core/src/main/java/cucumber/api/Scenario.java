@@ -1,12 +1,15 @@
 package cucumber.api;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Before or After Hooks that declare a parameter of this type will receive an instance of this class.
  * It allows writing text and embedding media into reports, as well as inspecting results (in an After block).
  */
 public interface Scenario {
+    
+    List<Object> getRunningTagNames();
     /**
      * @return source_tag_names. Needed for compatibility with Capybara.
      */
